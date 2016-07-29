@@ -2,10 +2,12 @@
 package org.usfirst.frc.team5677.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team5677.robot.commands.ExampleCommand;
+import org.usfirst.frc.team5677.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team5677.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -24,7 +26,9 @@ public class Robot extends IterativeRobot {
 
     Command autonomousCommand;
     SendableChooser chooser;
-
+    DriveTrain drive;
+    SmartDrive sd;
+    Joystick leftJoy, rightJoy;
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -35,6 +39,10 @@ public class Robot extends IterativeRobot {
         chooser.addDefault("Default Auto", new ExampleCommand());
 //        chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
+        drive = new DriveTrain(2,4,1,3);
+        sd = new SmartDrive(drive);
+        leftJoy = new Joystick(0);
+        rightJoy = new Joystick(1);
     }
 	
 	/**
@@ -97,6 +105,7 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        sd.tankDrive(leftJoy.getRawAxis(1), rightJoy.getRawAxis(1));
     }
     
     /**
