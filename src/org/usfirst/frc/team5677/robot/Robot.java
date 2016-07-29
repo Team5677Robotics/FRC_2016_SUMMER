@@ -105,7 +105,7 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        sd.tankDrive(leftJoy.getRawAxis(1), rightJoy.getRawAxis(1));
+        sd.arcadeDrive(leftJoy.getRawAxis(1), rightJoy.getRawAxis(0));
     }
     
     /**

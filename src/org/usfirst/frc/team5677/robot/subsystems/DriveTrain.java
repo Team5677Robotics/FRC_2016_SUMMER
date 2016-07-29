@@ -17,6 +17,7 @@ public class DriveTrain {
     }
     
     public void setRightSpeed(double speed){
+    	speed=-speed;
         rightMotor1.set(speed);
         rightMotor2.set(speed);
     }

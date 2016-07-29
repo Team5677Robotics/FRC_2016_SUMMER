@@ -21,7 +21,7 @@ public class SmartDrive {
 	 * @param speed
 	 */ 
 	private double skim(double speed){
-		double gain = 0.3;
+		double gain = 0.0;
 		if (speed > 1.0) {
 		    return -((speed - 1.0) * gain);
 		}else if (speed < -1.0) {
@@ -52,8 +52,8 @@ public class SmartDrive {
 		skimmedRightSpeed = rightSpeed + skim(rightSpeed);
 		
 		//if (getButtonA)
-		//System.out.println("left speeed: "+skimmedLeftSpeed);
-		//System.out.println("right speeed: "+skimmedRightSpeed);
+		System.out.println("left speeed: "+skimmedLeftSpeed);
+		System.out.println("right speeed: "+skimmedRightSpeed);
 		drive.setLeftSpeed(skimmedLeftSpeed);
 		drive.setRightSpeed(skimmedRightSpeed);
 	}
