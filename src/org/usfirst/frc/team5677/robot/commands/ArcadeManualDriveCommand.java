@@ -1,26 +1,33 @@
-
 package org.usfirst.frc.team5677.robot.commands;
+
+import org.usfirst.frc.team5677.robot.OI;
+import org.usfirst.frc.team5677.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team5677.robot.subsystems.SmartDrive;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-import org.usfirst.frc.team5677.robot.Robot;
-
 /**
- *
+ * Enables the joystick to control the drivetrain via arcade drive.
+ * 
+ * @author Vedaad Shakib
+ * @version 02/11/16
  */
-public class ExampleCommand extends Command {
-
-    public ExampleCommand() {
-        // Use requires() here to declare subsystem dependencies
-        requires(Robot.exampleSubsystem);
+public class ArcadeManualDriveCommand extends Command {
+    SmartDrive sd;
+	
+    public ArcadeManualDriveCommand() {
+        sd = SmartDrive.getInstance();
+	requires(sd);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+	sd.arcadeDrive(OI.getLeftJoystick().getRawAxis(1), OI.getRightJoystick().getRawAxis(0));
     }
 
     // Make this return true when this Command no longer needs to run execute()
