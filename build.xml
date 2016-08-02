@@ -23,8 +23,9 @@
   
   <property file="${user.home}/wpilib/wpilib.properties"/>
   <property file="build.properties"/>
-  <property file="${user.home}/wpilib/java/${version}/ant/build.properties"/>
-  
+  <property file="${user.home}/wpilib/java/${version}/ant/build.properties"/>  
+  <javac srcdir="${team5677lib.dir}" destdir="build"/>
+
   <import file="${wpilib.ant.dir}/build.xml"/>
 
 </project> 

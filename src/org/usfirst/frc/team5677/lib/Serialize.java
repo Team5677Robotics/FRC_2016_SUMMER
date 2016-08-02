@@ -1,4 +1,4 @@
-package trajectory;
+package org.usfirst.frc.team5677.lib;
 
 import java.io.*;
 import java.util.ArrayList;

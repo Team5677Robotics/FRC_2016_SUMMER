@@ -1,7 +1,7 @@
-package trajectory;
+package org.usfirst.frc.team5677.lib;
 
-import trajectory.Segment.*;
-import trajectory.TrajectoryException.*;
+import org.usfirst.frc.team5677.lib.Segment.*;
+import org.usfirst.frc.team5677.lib.TrajectoryException.*;
 
 public class TrajectoryFollower{
 

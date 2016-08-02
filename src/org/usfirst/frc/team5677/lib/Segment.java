@@ -1,4 +1,4 @@
-package trajectory;
+package org.usfirst.frc.team5677.lib;
 
 public class Segment {
     double velocity;
