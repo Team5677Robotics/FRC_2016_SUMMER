@@ -1,8 +1,8 @@
 package org.usfirst.frc.team5677.robot.controllers;
 
 import java.util.TimerTask;
-import org.usfirst.frc.team5677.lib.TrajectoryFollower.*;
-import org.usfirst.frc.team5677.lib.Segment.*;
+import org.usfirst.frc.team5677.lib.trajectory.TrajectoryFollower;
+import org.usfirst.frc.team5677.lib.trajectory.Segment;
 
 public class DriveStraightController extends TimerTask {
 
