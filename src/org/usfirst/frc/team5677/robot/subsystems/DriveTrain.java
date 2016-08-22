@@ -3,6 +3,7 @@ package org.usfirst.frc.team5677.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.Encoder;
 
 import org.usfirst.frc.team5677.robot.Constants;
 
@@ -16,6 +17,7 @@ import org.usfirst.frc.team5677.robot.Constants;
 public class DriveTrain {
     // motors
     public Spark leftMotor1, leftMotor2, rightMotor1, rightMotor2;
+    public Encoder leftEncoder, rightEncoder;
 
     // speed scales
     private static double	LEFT_SCALE  = 1;
@@ -32,6 +34,10 @@ public class DriveTrain {
         this.leftMotor2	 = new Spark(Constants.DriveTrain.LEFT_SPARK_PORT_2);
         this.rightMotor1 = new Spark(Constants.DriveTrain.RIGHT_SPARK_PORT_1);
         this.rightMotor2 = new Spark(Constants.DriveTrain.RIGHT_SPARK_PORT_2);
+        this.leftEncoder = new Encoder(Constants.DriveTrain.LEFT_ENCODER_PORT_A,Constants.DriveTrain.LEFT_ENCODER_PORT_B,false, Encoder.EncodingType.k4X);
+        this.rightEncoder = new Encoder(Constants.DriveTrain.RIGHT_ENCODER_PORT_A,Constants.DriveTrain.RIGHT_ENCODER_PORT_B,false, Encoder.EncodingType.k4X);
+        this.leftEncoder.reset();
+        this.rightEncoder.reset();
     }
 
     public static void initialize() {
@@ -46,13 +52,25 @@ public class DriveTrain {
     }
 
     public void setLeftSpeed(double speed) {
-        leftMotor1.set(speed*LEFT_SCALE);
-        leftMotor2.set(speed*LEFT_SCALE);
+        leftMotor1.set(-speed*LEFT_SCALE);
+        leftMotor2.set(-speed*LEFT_SCALE);
     }
     
     public void setRightSpeed(double speed) {
 	// motor is inverted
-        rightMotor1.set(-speed*RIGHT_SCALE);
-        rightMotor2.set(-speed*RIGHT_SCALE);
+        rightMotor1.set(speed*RIGHT_SCALE);
+        rightMotor2.set(speed*RIGHT_SCALE);
+    }
+
+    public void resetEncoders(){
+        this.leftEncoder.reset();
+        this.rightEncoder.reset();
+    }
+    public int getLeftEncoder(){
+        return this.leftEncoder.getRaw();
+    }
+
+    public int getRightEncoder(){
+        return this.rightEncoder.getRaw();
     }
 }

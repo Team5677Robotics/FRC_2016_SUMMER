@@ -25,6 +25,7 @@ public class SmartDrive extends Subsystem {
      */ 
     public SmartDrive() {
 	drive = DriveTrain.getInstance();
+    drive.resetEncoders();
     }
 
     public static void initialize() {
@@ -101,5 +102,6 @@ public class SmartDrive extends Subsystem {
     public void tankDrive(double leftY, double rightY) {
 	drive.setLeftSpeed(leftY);
 	drive.setRightSpeed(rightY);
+    System.out.println("Left Encoder: "+drive.getLeftEncoder()+"  ------- Right Encoder: "+drive.getRightEncoder());
     }
 }

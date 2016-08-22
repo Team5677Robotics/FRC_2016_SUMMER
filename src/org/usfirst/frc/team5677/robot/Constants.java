@@ -15,8 +15,11 @@ public class Constants {
 	public static final int	RIGHT_SPARK_PORT_1 = 1;
 	public static final int	RIGHT_SPARK_PORT_2 = 3;
 	
-	public static final int	ENCODER_RIGHT_PORT = 0;
-	public static final int	ENCODER_LEFT_PORT  = 1;
+	public static final int	RIGHT_ENCODER_PORT_A = 10;
+    public static final int RIGHT_ENCODER_PORT_B = 11;
+	public static final int	LEFT_ENCODER_PORT_A  = 12;
+	public static final int	LEFT_ENCODER_PORT_B  = 13;
+    
     }
 }
 

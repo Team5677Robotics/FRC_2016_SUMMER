@@ -22,7 +22,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
     public static OI oi;
     public static DriveTrain drive;
-    public static SmartDrive sd;
+    public static SmartDrive sd; 
     
     public Command autonomousCommand;
     public SendableChooser chooser;
@@ -35,8 +35,7 @@ public class Robot extends IterativeRobot {
         chooser = new SendableChooser();
         // chooser.addObject("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
-	
-	oi = OI.getInstance();
+    	oi = OI.getInstance();
         drive = DriveTrain.getInstance();
         sd = SmartDrive.getInstance();
     }
@@ -79,6 +78,7 @@ public class Robot extends IterativeRobot {
     	
     	// schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
+        drive.resetEncoders();
     }
 
     /**
@@ -94,6 +94,7 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
+        drive.resetEncoders();
     }
 
     /**
