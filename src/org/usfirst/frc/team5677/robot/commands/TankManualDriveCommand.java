@@ -27,7 +27,13 @@ public class TankManualDriveCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-	sd.tankDrive(OI.getLeftJoystick().getRawAxis(1), OI.getRightJoystick().getRawAxis(1));
+	
+        if(OI.getLeftJoystick().getRawButton(1)){
+            sd.tankDrive(1.0, 1.0);
+        }else{
+            sd.tankDrive(0.0, 0.0);
+        }
+        //sd.tankDrive(-OI.getLeftJoystick().getRawAxis(1), -OI.getRightJoystick().getRawAxis(1));
     }
 
     // Make this return true when this Command no longer needs to run execute()

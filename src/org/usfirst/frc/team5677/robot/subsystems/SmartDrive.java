@@ -54,7 +54,7 @@ public class SmartDrive extends Subsystem {
      * @param throttle, turn
      */ 
     public void arcadeDrive(double throttle, double turn) {
-	double leftSpeed, rightSpeed, skimmedLeftSpeed, skimmedRightSpeed;
+    double leftSpeed, rightSpeed, skimmedLeftSpeed, skimmedRightSpeed;
 	
 	if(turn < 0.1 && turn > -0.1){
 	    turn = 0.0;
@@ -63,15 +63,16 @@ public class SmartDrive extends Subsystem {
 	if(throttle < 0.1 && throttle > -0.1){
 	    throttle = 0.0;
 	}
-	
+	//System.out.println("throttle: "+throttle+"  ------  turn: "+turn);
 	leftSpeed  = throttle + turn;
 	rightSpeed = throttle - turn;
 	
-	skimmedLeftSpeed  = leftSpeed  + skim(leftSpeed);
-	skimmedRightSpeed = rightSpeed + skim(rightSpeed);
+	//System.out.println("left speeed: " +  leftSpeed + "  -------  right speeed: " + rightSpeed);
+    //System.out.println("Left Skim: "+skim(leftSpeed)+"  -------  Right Skim: "+skim(rightSpeed));
+	skimmedLeftSpeed  = leftSpeed  + skim(rightSpeed);
+	skimmedRightSpeed = rightSpeed + skim(leftSpeed);
 	
-	System.out.println("left speeed: " +  skimmedLeftSpeed);
-	System.out.println("right speeed: " + skimmedRightSpeed);
+	System.out.println("left speeed: " +  skimmedLeftSpeed + "  -------  right speeed: " + skimmedRightSpeed);
 	
 	drive.setLeftSpeed(skimmedLeftSpeed);
 	drive.setRightSpeed(skimmedRightSpeed);
@@ -83,7 +84,7 @@ public class SmartDrive extends Subsystem {
      * @param speed
      */ 
     private double skim(double speed) {
-	double gain = 0.0;
+	double gain = 0.7;
 	
 	if (speed > 1.0) {
 	    return -((speed - 1.0) * gain);
@@ -101,7 +102,8 @@ public class SmartDrive extends Subsystem {
      */
     public void tankDrive(double leftY, double rightY) {
 	drive.setLeftSpeed(leftY);
-	drive.setRightSpeed(rightY);
-    System.out.println("Left Encoder: "+drive.getLeftEncoder()+"  ------- Right Encoder: "+drive.getRightEncoder());
+	drive.setRightSpeed(rightY); 
+	//System.out.println("left speeed: " +  leftY + "  -------  right speeed: " + rightY);
+    System.out.println("Left Encoder: "+drive.getLeftEncoderRate()+"  ------- Right Encoder: "+drive.getRightEncoderRate());
     }
 }

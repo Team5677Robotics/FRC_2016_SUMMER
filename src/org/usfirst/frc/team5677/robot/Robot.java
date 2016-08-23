@@ -102,6 +102,8 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        SmartDashboard.putNumber("Left Rate", drive.getLeftEncoderRate());
+        SmartDashboard.putNumber("Right Rate", drive.getRightEncoderRate());
     }
     
     /**

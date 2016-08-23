@@ -38,6 +38,8 @@ public class DriveTrain {
         this.rightEncoder = new Encoder(Constants.DriveTrain.RIGHT_ENCODER_PORT_A,Constants.DriveTrain.RIGHT_ENCODER_PORT_B,false, Encoder.EncodingType.k4X);
         this.leftEncoder.reset();
         this.rightEncoder.reset();
+        this.leftEncoder.setDistancePerPulse((Constants.DriveTrain.WHEEL_DIAM*Math.PI)/Constants.DriveTrain.ENCODER_CYCLES_PER_REV);
+        this.rightEncoder.setDistancePerPulse((Constants.DriveTrain.WHEEL_DIAM*Math.PI)/Constants.DriveTrain.ENCODER_CYCLES_PER_REV);
     }
 
     public static void initialize() {
@@ -52,25 +54,35 @@ public class DriveTrain {
     }
 
     public void setLeftSpeed(double speed) {
-        leftMotor1.set(-speed*LEFT_SCALE);
-        leftMotor2.set(-speed*LEFT_SCALE);
+        leftMotor1.set(speed*LEFT_SCALE);
+        leftMotor2.set(speed*LEFT_SCALE);
     }
     
     public void setRightSpeed(double speed) {
 	// motor is inverted
-        rightMotor1.set(speed*RIGHT_SCALE);
-        rightMotor2.set(speed*RIGHT_SCALE);
+        rightMotor1.set(-speed*RIGHT_SCALE);
+        rightMotor2.set(-speed*RIGHT_SCALE);
     }
 
     public void resetEncoders(){
         this.leftEncoder.reset();
         this.rightEncoder.reset();
     }
-    public int getLeftEncoder(){
+
+    
+    public int getLeftEncoderRawCount(){
         return this.leftEncoder.getRaw();
     }
 
-    public int getRightEncoder(){
+    public int getRightEncoderRawCount(){
         return this.rightEncoder.getRaw();
+    }
+
+    public double getLeftEncoderRate(){
+        return this.leftEncoder.getRate();
+    }
+
+    public double getRightEncoderRate(){
+        return this.rightEncoder.getRate();
     }
 }

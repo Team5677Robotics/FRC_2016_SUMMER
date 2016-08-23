@@ -19,6 +19,9 @@ public class Constants {
     public static final int RIGHT_ENCODER_PORT_B = 11;
 	public static final int	LEFT_ENCODER_PORT_A  = 12;
 	public static final int	LEFT_ENCODER_PORT_B  = 13;
+
+    public static final int ENCODER_CYCLES_PER_REV = 256;
+    public static final double WHEEL_DIAM = 7.6;
     
     }
 }
