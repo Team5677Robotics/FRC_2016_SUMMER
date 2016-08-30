@@ -8,39 +8,37 @@ import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * Enables the joystick to control the drivetrain via arcade drive.
- * 
+ *
  * @author Vedaad Shakib
  * @version 02/11/16
  */
 public class ArcadeManualDriveCommand extends Command {
-    SmartDrive sd;
-	
-    public ArcadeManualDriveCommand() {
-        sd = SmartDrive.getInstance();
-	requires(sd);
-    }
+  SmartDrive sd;
 
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    	
-    }
+  public ArcadeManualDriveCommand() {
+    sd = SmartDrive.getInstance();
+    requires(sd);
+  }
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    sd.arcadeDrive(-OI.getLeftJoystick().getRawAxis(1), OI.getRightJoystick().getRawAxis(0));
-    }
+  // Called just before this Command runs the first time
+  protected void initialize() {}
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return false;
-    }
+  // Called repeatedly when this Command is scheduled to run
+  protected void execute() {
+      //Joystick setup if we are usign the logitech joysticks
+      //sd.arcadeDrive(-OI.getLeftJoystick().getRawAxis(1), OI.getRightJoystick().getRawAxis(0));
+      sd.arcadeDrive(OI.getRobotDriver().getLeftY(), OI.getRobotDriver().getRightX());
+  }
 
-    // Called once after isFinished returns true
-    protected void end() {
-    }
+  // Make this return true when this Command no longer needs to run execute()
+  protected boolean isFinished() {
+    return false;
+  }
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    }
+  // Called once after isFinished returns true
+  protected void end() {}
+
+  // Called when another command which requires one or more of the same
+  // subsystems is scheduled to run
+  protected void interrupted() {}
 }
