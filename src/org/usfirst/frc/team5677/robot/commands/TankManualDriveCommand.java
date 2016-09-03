@@ -8,39 +8,41 @@ import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * Enables the joystick to control the drivetrain via tank drive.
- * 
+ *
  * @author Vedaad Shakib
  * @version 02/11/16
  */
 public class TankManualDriveCommand extends Command {
-    SmartDrive sd;
-	
-    public TankManualDriveCommand() {
-        sd = SmartDrive.getInstance();
-	requires(sd);
-    }
+  SmartDrive sd;
 
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    	
-    }
+  public TankManualDriveCommand() {
+    sd = SmartDrive.getInstance();
+    requires(sd);
+  }
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-	sd.tankDrive(OI.getLeftJoystick().getRawAxis(1), OI.getRightJoystick().getRawAxis(1));
-    }
+  // Called just before this Command runs the first time
+  protected void initialize() {}
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return false;
-    }
+  // Called repeatedly when this Command is scheduled to run
+  protected void execute() {
 
-    // Called once after isFinished returns true
-    protected void end() {
+    if (OI.getLeftJoystick().getRawButton(1)) {
+      sd.tankDrive(0.5, 0.5);
+    } else {
+      sd.tankDrive(0.0, 0.0);
     }
+    // sd.tankDrive(-OI.getLeftJoystick().getRawAxis(1), -OI.getRightJoystick().getRawAxis(1));
+  }
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    }
+  // Make this return true when this Command no longer needs to run execute()
+  protected boolean isFinished() {
+    return false;
+  }
+
+  // Called once after isFinished returns true
+  protected void end() {}
+
+  // Called when another command which requires one or more of the same
+  // subsystems is scheduled to run
+  protected void interrupted() {}
 }

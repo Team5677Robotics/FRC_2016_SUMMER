@@ -37,6 +37,8 @@ public class GamepadWrapper extends Joystick {
 
     public static final int AXIS_DPAD_H = 6; //This was found in Overkill's code. Should be tested.
     public static final int AXIS_DPAD_V = 7;
+
+    
     
     public GamepadWrapper(int port) {
 	super(port);
@@ -55,19 +57,23 @@ public class GamepadWrapper extends Joystick {
     }
 
     public double getLeftX() {
-	return super.getX();
+	//return super.getX();
+	return super.getRawAxis(2);
     }
 
     public double getLeftY() {
-	return -super.getY(); //by default, forward returns a negative number, which is unintuitive
+	//return -super.getY(); //by default, forward returns a negative number, which is unintuitive
+	return -super.getRawAxis(1);
     }
 
     public double getRightX() {
-	return super.getZ();
+	//return super.getZ();
+	return super.getRawAxis(4);
     }
 
     public double getRightY() {
-	return -super.getThrottle(); //by default, forward returns a negative number, which is unintuitive
+	//return -super.getThrottle(); //by default, forward returns a negative number, which is unintuitive
+	return super.getRawAxis(5);
     }
     
     /**
