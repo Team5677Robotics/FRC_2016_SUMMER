@@ -11,6 +11,10 @@ import org.usfirst.frc.team5677.robot.subsystems.SmartDrive;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.usfirst.frc.team5677.robot.controllers.DriveStraightController;
+import org.usfirst.frc.team5677.lib.trajectory.TrajectoryGenerator;
+import org.usfirst.frc.team5677.lib.trajectory.Segment;
+import java.util.Timer;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -23,9 +27,13 @@ public class Robot extends IterativeRobot {
   public static OI oi;
   public static DriveTrain drive;
   public static SmartDrive sd;
-
+  public static DriveStraightController testDrive;
+  public static TrajectoryGenerator leftTrajectoryGen;
+  public static TrajectoryGenerator rightTrajectoryGen;
   public Command autonomousCommand;
   public SendableChooser chooser;
+  public Segment[] leftTrajectory;  
+  public Segment[] rightTrajectory; 
 
   /**
    * This function is run when the robot is first started up and should be
@@ -38,6 +46,12 @@ public class Robot extends IterativeRobot {
     oi = OI.getInstance();
     drive = DriveTrain.getInstance();
     sd = SmartDrive.getInstance();
+    leftTrajectoryGen = new TrajectoryGenerator(10, 15, 200);
+    rightTrajectoryGen = new TrajectoryGenerator(10, 15, 200);
+    leftTrajectory = leftTrajectoryGen.calcTrajectory(0,0,5);
+    rightTrajectory = rightTrajectoryGen.calcTrajectory(0,0,5);
+    testDrive = new DriveStraightController(leftTrajectory,rightTrajectory,
+					    10, 10, 200, drive);
   }
 
   /**
@@ -75,8 +89,14 @@ public class Robot extends IterativeRobot {
     } */
 
     // schedule the autonomous command (example)
+    
     if (autonomousCommand != null) autonomousCommand.start();
     drive.resetEncoders();
+    Timer timer = new Timer();
+    timer.schedule(testDrive, 0, 5);
+
+    //Segment[] leftTrajectory = leftTrajectoryGen.calcTrajectory(0,0,5);
+    
   }
 
   /**
@@ -84,6 +104,10 @@ public class Robot extends IterativeRobot {
    */
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
+    /*for(int i =0; i<leftTrajectory.length; i++){
+	System.out.println(leftTrajectory[i].toString());
+	//System.out.println(rightTrajectory);
+	}*/
   }
 
   public void teleopInit() {
