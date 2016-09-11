@@ -1,12 +1,13 @@
 package org.usfirst.frc.team5677.robot.controllers;
 
+import java.util.Timer;
 import java.util.TimerTask;
 import org.usfirst.frc.team5677.lib.trajectory.TrajectoryFollower;
 import org.usfirst.frc.team5677.lib.trajectory.Segment;
 import org.usfirst.frc.team5677.robot.subsystems.DriveTrain;
-import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class DriveStraightController extends TimerTask {
+public class DriveStraightController {
     TrajectoryFollower rightSide;
     TrajectoryFollower leftSide;
     double leftCurrPosition = 0.0;
@@ -15,7 +16,7 @@ public class DriveStraightController extends TimerTask {
     int sum =0;
     int prevSum = 0;
     double distanceTraveled =0.0;
-    //Timer t = new Timer();
+    Timer timer = new Timer();
     double initialTime;
     public DriveStraightController(
 				   Segment[] leftTrajectory,
@@ -23,10 +24,9 @@ public class DriveStraightController extends TimerTask {
 				   double leftMaxV,
 				   double rightMaxV,
 				   double controlLoop,
-				   DriveTrain drive) {
-	
-	double leftkV = 1 / leftMaxV;
-	double rightkV = 1 / rightMaxV; 
+				   DriveTrain drive){	
+	double leftkV = 1 / 5.0;
+	double rightkV = 1 / 5.0; 
 	double dt = 1 / controlLoop;
 	this.drive = drive;
 	//Will later set these values as constants in a constants file
@@ -43,38 +43,51 @@ public class DriveStraightController extends TimerTask {
     public boolean isDone(){
 	return rightSide.isTrajDone() && leftSide.isTrajDone();
     }
-    public void run() {
-	double deltaT = 0.0;
-	if (sum == 0) {
-	    initialTime = Timer.getFPGATimestamp();
-	    deltaT=0.0;
-	} else {
-	    double currTime = Timer.getFPGATimestamp();
-	    deltaT=currTime-initialTime;
-	    initialTime = currTime;
-	}
-	if (!rightSide.isTrajDone() && !leftSide.isTrajDone()) {
-	    double leftMotor = this.leftSide.calcMotorOutput(this.leftCurrPosition);
-	    double rightMotor = this.rightSide.calcMotorOutput(this.rightCurrPosition);
-	    /*System.out.println("Right Side Motor Val: "
+
+    public void start(){
+	rightSide.reset();
+	leftSide.reset();
+	timer.schedule(new DriveStraightTask(),0,5);
+    }
+
+    public void stop(){
+	timer.cancel();
+	timer.purge();
+	timer = new Timer();
+	System.out.println(isDone());
+    }
+    class DriveStraightTask extends TimerTask{
+	
+	public void run() {
+	    if (!rightSide.isTrajDone() && !leftSide.isTrajDone()) {
+		double leftMotor = leftSide.calcMotorOutput(leftCurrPosition);
+		double rightMotor = rightSide.calcMotorOutput(rightCurrPosition);
+		/*System.out.println("Right Side Motor Val: "
 			       + rightMotor
 			       + "----- Left Side Motor Val: "
 			       + leftMotor
 			       + "\n");*/
-	    sum++;
-	    if (prevSum+1 != sum) {
-		System.out.println("rlafsdhawlekfhlkgjhalwgejwhgalwkgjhalwgjkhaleghajwegaweg");
+		if(leftMotor>1.0){
+		    leftMotor=1.0;
+		}
+		if(rightMotor>1.0){
+		    rightMotor=1.0;
+		}
+	    
+		SmartDashboard.putNumber("leftMotorTraj", leftMotor);
+		SmartDashboard.putNumber("rightMotorTraj", rightMotor);
+		drive.setLeftSpeed(leftMotor);
+		drive.setRightSpeed(rightMotor);
+		SmartDashboard.putNumber("Left Rate", drive.getLeftEncoderRate());
+		SmartDashboard.putNumber("Right Rate", drive.getRightEncoderRate());
+
+	    } else {
+		System.out.println("dddddddddddddddd");
+		drive.setLeftSpeed(0.0);
+		drive.setRightSpeed(0.0);
+		timer.cancel();
+		//timer.purge();
 	    }
-	    prevSum = sum;
-	    System.out.println("Sum///////////"+sum);
-	    distanceTraveled += deltaT*(leftMotor/10);
-	    System.out.println("Delta T:"+deltaT+" ------ Distance Traveled: "+distanceTraveled);
-	    //drive.setLeftSpeed(leftMotor);
-	    //drive.setRightSpeed(rightMotor);
-	} else {
-	    System.out.println("dddddddddddddddd");
-	    drive.setLeftSpeed(0.0);
-	    drive.setRightSpeed(0.0);
 	}
     }
-}
+ }

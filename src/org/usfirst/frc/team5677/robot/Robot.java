@@ -34,7 +34,7 @@ public class Robot extends IterativeRobot {
   public SendableChooser chooser;
   public Segment[] leftTrajectory;  
   public Segment[] rightTrajectory; 
-
+  public Timer timer = new Timer();
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -59,7 +59,11 @@ public class Robot extends IterativeRobot {
    * You can use it to reset any subsystem information you want to clear when
    * the robot is disabled.
    */
-  public void disabledInit() {}
+  public void disabledInit() {
+      System.out.println("hello");
+      testDrive.stop();
+      //timer.purge();
+  }
 
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
@@ -92,9 +96,9 @@ public class Robot extends IterativeRobot {
     
     if (autonomousCommand != null) autonomousCommand.start();
     drive.resetEncoders();
-    Timer timer = new Timer();
-    timer.schedule(testDrive, 0, 5);
-
+    System.out.println("This is a test");
+    //timer.schedule(testDrive, 0, 5);
+    testDrive.start();
     //Segment[] leftTrajectory = leftTrajectoryGen.calcTrajectory(0,0,5);
     
   }

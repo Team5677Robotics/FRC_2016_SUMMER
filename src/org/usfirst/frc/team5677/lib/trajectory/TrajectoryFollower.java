@@ -32,6 +32,10 @@ public class TrajectoryFollower {
     return this.isDone;
   }
 
+  public void reset(){
+     this.isDone = false;
+     this.step = 0;
+  }
   public double getFeedBack(double setpointPosition, double actualPosition) {
     double error = setpointPosition - actualPosition;
     this.sumError += error;
