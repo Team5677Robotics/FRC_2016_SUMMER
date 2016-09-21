@@ -14,35 +14,40 @@ import org.usfirst.frc.team5677.robot.wrappers.JoystickButtonWrapper;
  * @version 07/30/16
  */
 public class OI {
-    private static OI		oi;
-    private static Joystick	joystickLeft;
-    private static Joystick	joystickRight;
+  private static OI oi;
+  private static Joystick joystickLeft;
+  private static Joystick joystickRight;
+  private static GamepadWrapper robotDriver;
 
-    /*
-     * Creates joystick instances and maps buttons
-     */
-    public OI() {
-	joystickLeft  = new Joystick(0);
-	joystickRight = new Joystick(1);
-    }
+  /*
+   * Creates joystick instances and maps buttons
+   */
+  public OI() {
+    joystickLeft = new Joystick(0);
+    joystickRight = new Joystick(1);
+    robotDriver = new GamepadWrapper(3);
+  }
 
-    public static void initialize() {
-	if (oi == null) {
-	    oi = new OI();
-	}
+  public static void initialize() {
+    if (oi == null) {
+      oi = new OI();
     }
+  }
 
-    public static OI getInstance() {
-	initialize();
-	return oi;
-    }
+  public static OI getInstance() {
+    initialize();
+    return oi;
+  }
 
-    public static Joystick getRightJoystick() {
-	return joystickRight;
-    }
+  public static GamepadWrapper getRobotDriver() {
+    return robotDriver;
+  }
 
-    public static Joystick getLeftJoystick() {
-	return joystickLeft;
-    }
+  public static Joystick getRightJoystick() {
+    return joystickRight;
+  }
+
+  public static Joystick getLeftJoystick() {
+    return joystickLeft;
+  }
 }
-
