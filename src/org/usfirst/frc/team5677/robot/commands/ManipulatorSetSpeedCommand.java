@@ -5,25 +5,24 @@ import org.usfirst.frc.team5677.robot.subsystems.Manipulator;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Toggles the intake motor
+ * Turns on the motor for the intake to suck in the boulder.
  * 
  * @author Vedaad Shakib
  */
-public class IntakeOutCommand extends Command {
+public class ManipulatorSetSpeedCommand extends Command {
     Manipulator manipulator;
-    double eps = Math.pow(10, -6);
+    private double speed;
 	
-    public IntakeOutCommand() {
+    public ManipulatorSetSpeedCommand(double speed) {
+    	this.speed = speed;
+    	
         manipulator = Manipulator.getInstance();
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if (manipulator.getIntake() < eps || manipulator.getIntake() > -eps) {
-    		manipulator.setIntake(-1);
-    	} else {
-    		manipulator.setIntake(0);
-    	}
+    	manipulator.setIntake(speed);
+	manipulator.setConveyor(speed);
     }
 
     // Called repeatedly when this Command is scheduled to run

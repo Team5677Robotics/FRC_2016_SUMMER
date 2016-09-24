@@ -17,6 +17,8 @@ import org.usfirst.frc.team5677.lib.trajectory.TrajectoryGenerator;
 import org.usfirst.frc.team5677.lib.trajectory.Segment;
 import java.util.Timer;
 
+import edu.wpi.first.wpilibj.Compressor;
+
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
@@ -37,6 +39,7 @@ public class Robot extends IterativeRobot {
   public Segment[] leftTrajectory;  
   public Segment[] rightTrajectory; 
   public Timer timer = new Timer();
+  public Compressor compressor;
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -50,10 +53,12 @@ public class Robot extends IterativeRobot {
     sd = SmartDrive.getInstance();
     leftTrajectoryGen = new TrajectoryGenerator(10, 15, 200);
     rightTrajectoryGen = new TrajectoryGenerator(10, 15, 200);
-    leftTrajectory = leftTrajectoryGen.calcTrajectory(0,0,5);
-    rightTrajectory = rightTrajectoryGen.calcTrajectory(0,0,5);
+    leftTrajectory = leftTrajectoryGen.calcTrajectory(0,0,10);
+    rightTrajectory = rightTrajectoryGen.calcTrajectory(0,0,10);
     testDrive = new DriveStraightController(leftTrajectory,rightTrajectory,
 					    10, 10, 200, drive);
+    compressor = new Compressor(0);
+    compressor.setClosedLoopControl(true);
   }
 
   /**

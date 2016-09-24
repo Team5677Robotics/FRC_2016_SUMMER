@@ -7,10 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team5677.robot.wrappers.GamepadWrapper;
 import org.usfirst.frc.team5677.robot.wrappers.JoystickButtonWrapper;
 
-import org.usfirst.frc.team5677.robot.commands.IntakeInCommand;
-import org.usfirst.frc.team5677.robot.commands.IntakeOutCommand;
-import org.usfirst.frc.team5677.robot.commands.ConveyorOutCommand;
-import org.usfirst.frc.team5677.robot.commands.ConveyorInCommand;
+import org.usfirst.frc.team5677.robot.commands.ManipulatorSetSpeedCommand;
 import org.usfirst.frc.team5677.robot.commands.IntakeSolenoidTriggerCommand;
 
 
@@ -35,12 +32,16 @@ public class OI {
     joystickRight = new Joystick(1);
     robotDriver = new GamepadWrapper(3);
 
-    robotDriver.getButtonA().whenPressed(new IntakeInCommand());
-    robotDriver.getButtonB().whenPressed(new IntakeOutCommand());
-    robotDriver.getButtonX().whenPressed(new ConveyorInCommand());
-    robotDriver.getButtonY().whenPressed(new ConveyorOutCommand());
-    
-    robotDriver.getButtonBumperLeft().whenPressed(new IntakeSolenoidTriggerCommand());
+    JoystickButtonWrapper button4 = new JoystickButtonWrapper(joystickLeft, 4);
+    button4.whenPressed(new ManipulatorSetSpeedCommand(0.7));
+    button4.whenReleased(new ManipulatorSetSpeedCommand(0));
+
+    JoystickButtonWrapper button5 = new JoystickButtonWrapper(joystickLeft, 5);
+    button5.whenPressed(new ManipulatorSetSpeedCommand(-0.7));
+    button5.whenReleased(new ManipulatorSetSpeedCommand(0));
+
+    JoystickButtonWrapper button2 = new JoystickButtonWrapper(joystickLeft, 2);
+    button2.whenPressed(new IntakeSolenoidTriggerCommand());
   }
 
   public static void initialize() {
