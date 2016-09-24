@@ -18,6 +18,8 @@ import org.usfirst.frc.team5677.lib.trajectory.Segment;
 import java.util.Timer;
 
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.CameraServer;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -40,6 +42,9 @@ public class Robot extends IterativeRobot {
   public Segment[] rightTrajectory; 
   public Timer timer = new Timer();
   public Compressor compressor;
+
+    public CameraServer cam;
+    
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -59,6 +64,10 @@ public class Robot extends IterativeRobot {
 					    10, 10, 200, drive);
     compressor = new Compressor(0);
     compressor.setClosedLoopControl(true);
+
+    // camera
+    cam = CameraServer.getInstance();
+    cam.startAutomaticCapture("cam0");
   }
 
   /**

@@ -29,5 +29,8 @@ public class Constants {
       public static final int CONVEYOR_MOTOR_PORT = 6;
       
       public static final int INTAKE_SOLENOID_PORT = 7;
+
+      public static final int SHOOTER_PORT = 9;
+      public static final int SHOOTER_ROT_PORT = 8;
   }
 }
