@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team5677.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team5677.robot.subsystems.SmartDrive;
+import org.usfirst.frc.team5677.robot.subsystems.Manipulator;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -27,6 +28,7 @@ public class Robot extends IterativeRobot {
   public static OI oi;
   public static DriveTrain drive;
   public static SmartDrive sd;
+  public static Manipulator manipulator;
   public static DriveStraightController testDrive;
   public static TrajectoryGenerator leftTrajectoryGen;
   public static TrajectoryGenerator rightTrajectoryGen;
