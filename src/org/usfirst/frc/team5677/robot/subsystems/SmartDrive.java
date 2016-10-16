@@ -1,15 +1,10 @@
 package org.usfirst.frc.team5677.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-
-import org.usfirst.frc.team5677.robot.subsystems.DriveTrain;
-
 import org.usfirst.frc.team5677.robot.commands.ArcadeManualDriveCommand;
-import org.usfirst.frc.team5677.robot.commands.TankManualDriveCommand;
 
 /**
- * High-level Wrapper for DriveTrain class. Capable of performing both arcade
- * and tank drive.
+ * High-level Wrapper for DriveTrain class. Capable of performing both arcade and tank drive.
  *
  * @author Rishi Desai
  * @author Vedaad Shakib
@@ -20,9 +15,7 @@ public class SmartDrive extends Subsystem {
   private static DriveTrain drive;
   private static SmartDrive sd;
 
-  /**
-   * Constructs a TeleopDrive object
-   */
+  /** Constructs a TeleopDrive object */
   public SmartDrive() {
     drive = DriveTrain.getInstance();
     drive.resetEncoders();
@@ -40,8 +33,8 @@ public class SmartDrive extends Subsystem {
   }
 
   /**
-   * Sets the default command to be manual drive, which allows the human
-   * player to drive the robot using the joysticks.
+   * Sets the default command to be manual drive, which allows the human player to drive the robot
+   * using the joysticks.
    */
   public void initDefaultCommand() {
     setDefaultCommand(new ArcadeManualDriveCommand());

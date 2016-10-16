@@ -1,11 +1,9 @@
 package org.usfirst.frc.team5677.robot.subsystems;
 
-
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Victor;
 import org.usfirst.frc.team5677.robot.Constants;
-
 
 /**
  * This subsystem includes methods to operate the Manipulator.
@@ -108,6 +106,14 @@ public class Manipulator {
 
   public void setIntakeSolenoid(boolean state) {
     this.intakeSolenoid.set(state);
+  }
+
+  public void setIntake(double speed) {
+    this.intakeMotor.set(speed);
+  }
+
+  public void setConveyor(double speed) {
+    this.conveyorMotor.set(speed);
   }
 
   public void setShooterHoodSolenoid(boolean state) {

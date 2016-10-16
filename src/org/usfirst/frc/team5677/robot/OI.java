@@ -1,20 +1,16 @@
 package org.usfirst.frc.team5677.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
-import edu.wpi.first.wpilibj.command.Command;
-
-import org.usfirst.frc.team5677.robot.wrappers.GamepadWrapper;
-import org.usfirst.frc.team5677.robot.wrappers.JoystickButtonWrapper;
-
-import org.usfirst.frc.team5677.robot.commands.ManipulatorSetSpeedCommand;
 import org.usfirst.frc.team5677.robot.commands.IntakeSolenoidTriggerCommand;
+import org.usfirst.frc.team5677.robot.commands.ManipulatorSetSpeedCommand;
 import org.usfirst.frc.team5677.robot.commands.ShooterHoodTriggerCommand;
 import org.usfirst.frc.team5677.robot.commands.ToggleRevModeCommand;
 import org.usfirst.frc.team5677.robot.commands.TurnTurretCommand;
+import org.usfirst.frc.team5677.robot.wrappers.GamepadWrapper;
+import org.usfirst.frc.team5677.robot.wrappers.JoystickButtonWrapper;
 /**
- * This class is the glue that binds the controls on the physical operator
- * interface to the commands and command groups that allow control of the robot.
+ * This class is the glue that binds the controls on the physical operator interface to the commands
+ * and command groups that allow control of the robot.
  *
  * @author Vedaad Shakib
  * @version 07/30/16
@@ -60,7 +56,7 @@ public class OI {
       oi = new OI();
     }
   }
-    
+
   public static OI getInstance() {
     initialize();
     return oi;

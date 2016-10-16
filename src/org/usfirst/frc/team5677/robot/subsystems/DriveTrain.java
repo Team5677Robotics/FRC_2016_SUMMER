@@ -1,10 +1,8 @@
 package org.usfirst.frc.team5677.robot.subsystems;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
 
-import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Encoder;
-
+import edu.wpi.first.wpilibj.Spark;
 import org.usfirst.frc.team5677.robot.Constants;
 
 /**
@@ -26,9 +24,7 @@ public class DriveTrain {
   // singleton instance of DriveTrain
   private static DriveTrain drive;
 
-  /**
-   * Initializes the Sparks.
-   */
+  /** Initializes the Sparks. */
   public DriveTrain() {
     this.leftMotor1 = new Spark(Constants.DriveTrain.LEFT_SPARK_PORT_1);
     this.leftMotor2 = new Spark(Constants.DriveTrain.LEFT_SPARK_PORT_2);

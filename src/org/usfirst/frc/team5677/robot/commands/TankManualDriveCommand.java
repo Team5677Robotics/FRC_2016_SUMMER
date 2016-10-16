@@ -1,10 +1,8 @@
 package org.usfirst.frc.team5677.robot.commands;
 
-import org.usfirst.frc.team5677.robot.OI;
-import org.usfirst.frc.team5677.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team5677.robot.subsystems.SmartDrive;
-
 import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc.team5677.robot.OI;
+import org.usfirst.frc.team5677.robot.subsystems.SmartDrive;
 
 /**
  * Enables the joystick to control the drivetrain via tank drive.

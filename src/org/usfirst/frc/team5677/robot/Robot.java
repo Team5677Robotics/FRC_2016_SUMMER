@@ -1,33 +1,27 @@
 package org.usfirst.frc.team5677.robot;
 
+import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-
-import org.usfirst.frc.team5677.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team5677.robot.subsystems.SmartDrive;
-import org.usfirst.frc.team5677.robot.subsystems.Manipulator;
-
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team5677.robot.controllers.DriveStraightController;
-import org.usfirst.frc.team5677.lib.trajectory.TrajectoryGenerator;
-import org.usfirst.frc.team5677.lib.trajectory.Segment;
 import java.util.Timer;
-
+import org.usfirst.frc.team5677.lib.trajectory.Segment;
+import org.usfirst.frc.team5677.lib.trajectory.TrajectoryGenerator;
 import org.usfirst.frc.team5677.robot.commands.RevShooterCommand;
-import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.CameraServer;
-
+import org.usfirst.frc.team5677.robot.controllers.DriveStraightController;
+import org.usfirst.frc.team5677.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team5677.robot.subsystems.Manipulator;
+import org.usfirst.frc.team5677.robot.subsystems.SmartDrive;
 
 /**
- * The VM is configured to automatically run this class, and to call the
- * functions corresponding to each mode, as described in the IterativeRobot
- * documentation. If you change the name of this class or the package after
- * creating this project, you must also update the manifest file in the resource
- * directory.
+ * The VM is configured to automatically run this class, and to call the functions corresponding to
+ * each mode, as described in the IterativeRobot documentation. If you change the name of this class
+ * or the package after creating this project, you must also update the manifest file in the
+ * resource directory.
  */
 public class Robot extends IterativeRobot {
   public static OI oi;
@@ -39,20 +33,18 @@ public class Robot extends IterativeRobot {
   public static TrajectoryGenerator rightTrajectoryGen;
   public Command autonomousCommand;
   public SendableChooser chooser;
-  public Segment[] leftTrajectory;  
-  public Segment[] rightTrajectory; 
+  public Segment[] leftTrajectory;
+  public Segment[] rightTrajectory;
   public Timer timer = new Timer();
   public Compressor compressor;
-<<<<<<< HEAD
-    public RevShooterCommand revShooterCommand = new RevShooterCommand();
-=======
 
-    public CameraServer cam;
-    
->>>>>>> 724c41e552c67365f69f40069268a99b14ad2f78
+  public RevShooterCommand revShooterCommand = new RevShooterCommand();
+
+  public CameraServer cam;
+
   /**
-   * This function is run when the robot is first started up and should be
-   * used for any initialization code.
+   * This function is run when the robot is first started up and should be used for any
+   * initialization code.
    */
   public void robotInit() {
     chooser = new SendableChooser();
@@ -63,10 +55,9 @@ public class Robot extends IterativeRobot {
     sd = SmartDrive.getInstance();
     leftTrajectoryGen = new TrajectoryGenerator(10, 15, 200);
     rightTrajectoryGen = new TrajectoryGenerator(10, 15, 200);
-    leftTrajectory = leftTrajectoryGen.calcTrajectory(0,0,15);
-    rightTrajectory = rightTrajectoryGen.calcTrajectory(0,0,15);
-    testDrive = new DriveStraightController(leftTrajectory,rightTrajectory,
-					    10, 10, 200, drive);
+    leftTrajectory = leftTrajectoryGen.calcTrajectory(0, 0, 15);
+    rightTrajectory = rightTrajectoryGen.calcTrajectory(0, 0, 15);
+    testDrive = new DriveStraightController(leftTrajectory, rightTrajectory, 10, 10, 200, drive);
     manipulator = Manipulator.getInstance();
     compressor = new Compressor(0);
     compressor.setClosedLoopControl(true);
@@ -77,15 +68,14 @@ public class Robot extends IterativeRobot {
   }
 
   /**
-   * This function is called once each time the robot enters Disabled mode.
-   * You can use it to reset any subsystem information you want to clear when
-   * the robot is disabled.
+   * This function is called once each time the robot enters Disabled mode. You can use it to reset
+   * any subsystem information you want to clear when the robot is disabled.
    */
   public void disabledInit() {
-      System.out.println("hello");
-      testDrive.stop();
-      manipulator.setTurret(0.0);
-      //timer.purge();
+    System.out.println("hello");
+    testDrive.stop();
+    manipulator.setTurret(0.0);
+    //timer.purge();
   }
 
   public void disabledPeriodic() {
@@ -93,13 +83,14 @@ public class Robot extends IterativeRobot {
   }
 
   /**
-   * This autonomous (along with the chooser code above) shows how to select between different autonomous modes
-   * using the dashboard. The sendable chooser code works with the Java SmartDashboard. If you prefer the LabVIEW
-   * Dashboard, remove all of the chooser code and uncomment the getString code to get the auto name from the text box
-   * below the Gyro
+   * This autonomous (along with the chooser code above) shows how to select between different
+   * autonomous modes using the dashboard. The sendable chooser code works with the Java
+   * SmartDashboard. If you prefer the LabVIEW Dashboard, remove all of the chooser code and
+   * uncomment the getString code to get the auto name from the text box below the Gyro
    *
-   * You can add additional auto modes by adding additional commands to the chooser code above (like the commented example)
-   * or additional comparisons to the switch structure below with additional strings & commands.
+   * <p>You can add additional auto modes by adding additional commands to the chooser code above
+   * (like the commented example) or additional comparisons to the switch structure below with
+   * additional strings & commands.
    */
   public void autonomousInit() {
     autonomousCommand = (Command) chooser.getSelected();
@@ -116,25 +107,23 @@ public class Robot extends IterativeRobot {
     } */
 
     // schedule the autonomous command (example)
-    
+
     if (autonomousCommand != null) autonomousCommand.start();
     drive.resetEncoders();
     System.out.println("This is a test");
     //timer.schedule(testDrive, 0, 5);
     testDrive.start();
     //Segment[] leftTrajectory = leftTrajectoryGen.calcTrajectory(0,0,5);
-    
+
   }
 
-  /**
-   * This function is called periodically during autonomous
-   */
+  /** This function is called periodically during autonomous */
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
     /*for(int i =0; i<leftTrajectory.length; i++){
-	System.out.println(leftTrajectory[i].toString());
-	//System.out.println(rightTrajectory);
-	}*/
+    System.out.println(leftTrajectory[i].toString());
+    //System.out.println(rightTrajectory);
+    }*/
   }
 
   public void teleopInit() {
@@ -148,14 +137,12 @@ public class Robot extends IterativeRobot {
     revShooterCommand.start();
   }
 
-  /**
-   * This function is called periodically during operator control
-   */
+  /** This function is called periodically during operator control */
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
     SmartDashboard.putNumber("Left Rate", drive.getLeftEncoderRate());
-    SmartDashboard.putNumber("Right Rate", drive.getRightEncoderRate()); 
-    
+    SmartDashboard.putNumber("Right Rate", drive.getRightEncoderRate());
+
     //manipulator.setTurret(oi.getLeftJoystick().getRawAxis(1));
     //System.out.println("Turret Raw: "+manipulator.getTurretEncoderRawCount()
     //		       + " //////// FlyWheel Raw: "+ manipulator.getFlyWheelEncoderRawCount()
@@ -165,9 +152,7 @@ public class Robot extends IterativeRobot {
     SmartDashboard.putNumber("Encoder stuff: ", manipulator.turretEncoder.getEncodingScale());
   }
 
-  /**
-   * This function is called periodically during test mode
-   */
+  /** This function is called periodically during test mode */
   public void testPeriodic() {
     LiveWindow.run();
   }
