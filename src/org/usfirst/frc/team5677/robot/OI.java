@@ -8,6 +8,9 @@ import org.usfirst.frc.team5677.robot.commands.ToggleRevModeCommand;
 import org.usfirst.frc.team5677.robot.commands.TurnTurretCommand;
 import org.usfirst.frc.team5677.robot.wrappers.GamepadWrapper;
 import org.usfirst.frc.team5677.robot.wrappers.JoystickButtonWrapper;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 /**
  * This class is the glue that binds the controls on the physical operator interface to the commands
  * and command groups that allow control of the robot.
@@ -48,7 +51,7 @@ public class OI {
     button1.whenPressed(new ToggleRevModeCommand());
 
     JoystickButtonWrapper button6 = new JoystickButtonWrapper(joystickLeft, 6);
-    button6.whenPressed(new TurnTurretCommand(25.0));
+    button6.whenPressed(new TurnTurretCommand());
   }
 
   public static void initialize() {

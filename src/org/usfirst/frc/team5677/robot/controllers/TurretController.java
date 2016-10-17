@@ -25,7 +25,7 @@ public class TurretController extends PIDController {
   }
 
   public double getTurretSpeed(double current) {
-    double turretSpeed = super.getOutput(Constants.Manipulator.TURRET_TICKS_PER_DEGREE, current);
+    double turretSpeed = super.getOutput(this.setpoint, current);
 
     if (turretSpeed > 0.2) {
       turretSpeed = 0.2;

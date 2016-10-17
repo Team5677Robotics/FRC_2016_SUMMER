@@ -150,6 +150,7 @@ public class Robot extends IterativeRobot {
     SmartDashboard.putNumber("Turret Raw Count", manipulator.getTurretEncoderRawCount());
     SmartDashboard.putNumber("FlyWheel RPM", manipulator.getFlywheelRPM());
     SmartDashboard.putNumber("Encoder stuff: ", manipulator.turretEncoder.getEncodingScale());
+    //System.out.println(SmartDashboard.getNumber("CameraAngle"));
   }
 
   /** This function is called periodically during test mode */
